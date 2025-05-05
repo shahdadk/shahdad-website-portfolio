@@ -82,34 +82,16 @@ export default function Portfolio() {
 
   const educationItems = [
     {
-      title: "Master's Degree in Computer Science",
-      organization: "Stanford University",
-      date: "2018 - 2020",
-      description: "Specialized in Mobile Computing and Distributed Systems",
+      title: "BASc in Mechatronics Engineering",
+      organization: "University of Waterloo",
+      date: "2024 - 2029",
+      description: "Excellent standing, GPA 3.9/4.0\nNorman Esch Enterprise Co-op Award - $10,000\nPresident’s Scholarship of Distinction - $5,000",
     },
     {
-      title: "Bachelor's Degree in Software Engineering",
-      organization: "University of California, Berkeley",
-      date: "2014 - 2018",
-      description: "Graduated with honors, GPA 3.9/4.0",
-    },
-    {
-      title: "Apple WWDC Scholar",
-      organization: "Apple Inc.",
-      date: "2017",
-      description: "Selected as one of 350 scholars worldwide",
-    },
-    {
-      title: "AWS Certified Solutions Architect",
-      organization: "Amazon Web Services",
-      date: "2021",
-      description: "Professional certification for AWS architecture",
-    },
-    {
-      title: "Google Cloud Professional Developer",
-      organization: "Google Cloud",
-      date: "2022",
-      description: "Advanced certification for cloud development",
+      title: "Ontario Secondary School Diploma",
+      organization: "Waterloo Collegiate Institute",
+      date: "2020 - 2024",
+      description: "Advanced placement, 97.16%",
     },
   ]
 
@@ -147,7 +129,7 @@ export default function Portfolio() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.00 }}
           >
             <span className="relative">
               Shahdad Kompani
@@ -169,7 +151,7 @@ export default function Portfolio() {
             {["iOS Engineer", "Full-Stack Engineer", "Dev Ops"].map((role, index) => (
               <motion.span
                 key={role}
-                className="px-4 py-2 rounded-full bg-gray-800 text-sm md:text-base cursor-pointer"
+                className="px-4 py-2 rounded-full bg-gray-800 text-sm md:text-base"
                 whileHover={{
                   scale: 1.1,
                   backgroundColor: "#2d3748",
@@ -203,7 +185,7 @@ export default function Portfolio() {
               <span className="sr-only">GitHub</span>
             </motion.a>
             <motion.a
-              href="https://linkedin.com/shahdadk"
+              href="https://linkedin.com/in/shahdadk"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
@@ -235,7 +217,7 @@ export default function Portfolio() {
                 animate={{ opacity: activeSection === "production" ? 0.3 : 0 }}
               />
               <h2 className="text-xl font-bold mb-1">Projects in Production</h2>
-              <p className="text-sm text-gray-400">Enterprise & commercial work</p>
+              <p className="text-sm text-gray-400">Live with real users</p>
             </motion.button>
 
             <motion.button
