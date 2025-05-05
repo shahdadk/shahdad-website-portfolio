@@ -82,10 +82,22 @@ export default function Portfolio() {
 
   const educationItems = [
     {
+      title: "Norman Esch Enterprise Co-op Award",
+      organization: "University of Waterloo",
+      date: "2025",
+      description: "Pitch competition, $10,000",
+    },
+    {
       title: "BASc in Mechatronics Engineering",
       organization: "University of Waterloo",
       date: "2024 - 2029",
-      description: "Excellent standing, GPA 3.9/4.0\nNorman Esch Enterprise Co-op Award - $10,000\nPresident’s Scholarship of Distinction - $5,000",
+      description: "Excellent standing, GPA 3.9/4.0",
+    },
+    {
+      title: "President’s Scholarship of Distinction",
+      organization: "University of Waterloo",
+      date: "2024",
+      description: "$5,000",
     },
     {
       title: "Ontario Secondary School Diploma",
@@ -320,7 +332,7 @@ export default function Portfolio() {
             >
               <h2 className="text-3xl font-bold mb-8 text-center">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-teal-600">
-                  Education & Certifications
+                  Awards & Education
                 </span>
               </h2>
               <div className="max-w-3xl mx-auto">
