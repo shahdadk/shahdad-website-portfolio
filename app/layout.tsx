@@ -2,11 +2,12 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: "Shahdad Kompani | Portfolio",
+  description: "iOS & full-stack engineer building things people actually use.",
+  icons: {
+    icon: "public/TopImage.png",
+  }
 }
-
 export default function RootLayout({
   children,
 }: Readonly<{
