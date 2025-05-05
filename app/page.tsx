@@ -216,7 +216,7 @@ export default function Portfolio() {
                 className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0"
                 animate={{ opacity: activeSection === "production" ? 0.3 : 0 }}
               />
-              <h2 className="text-xl font-bold mb-1">Projects in Production</h2>
+              <h2 className="text-xl font-bold mb-1">Released Apps</h2>
               <p className="text-sm text-gray-400">Live with real users</p>
             </motion.button>
 
@@ -272,7 +272,7 @@ export default function Portfolio() {
             >
               <h2 className="text-3xl font-bold mb-8 text-center">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">
-                  Projects in Production
+                  Released Apps
                 </span>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -335,17 +335,31 @@ export default function Portfolio() {
         </AnimatePresence>
 
         {!activeSection && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
-            className="text-center max-w-2xl mx-auto mt-16"
-          >
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">I build things people actually use</h2>
-            
-            <p className="text-gray-400">Select a section above to explore my work and background</p>
-          </motion.section>
-        )}
+  <motion.section
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: 1.2 }}
+    className="text-center max-w-2xl mx-auto mt-16"
+  >
+    <h2 className="text-2xl md:text-3xl font-bold mb-4">
+      I build things people{" "}
+      <span className="relative inline-block">
+        actually use
+        <motion.span
+          className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-teal-500"
+          initial={{ width: 0 }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 1, delay: 1.4 }}
+        />
+      </span>
+    </h2>
+
+    <p className="text-gray-400">
+      Select a section above to explore my work and background
+    </p>
+  </motion.section>
+)}
+
       </div>
 
       <footer className="mt-auto py-8 text-center text-gray-400 text-sm relative z-10">
