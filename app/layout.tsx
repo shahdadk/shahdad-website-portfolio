@@ -1,21 +1,29 @@
-import type { Metadata } from 'next'
-import './globals.css'
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Shahdad Kompani | Portfolio",
   description: "iOS & full-stack engineer building things people actually use.",
   icons: {
-    icon: "public/TopImage.png",
-  }
-}
+    icon: [
+      {
+        url: "app/TopImage.png",   // served from /public/TopImage.png
+        type: "image/png",
+        sizes: "500x500",       // valid, but see notes below
+      },
+    ],
+    apple: "app/TopImage.png",     // optional iOS icon
+  },
+};
+
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
-  )
+  );
 }
