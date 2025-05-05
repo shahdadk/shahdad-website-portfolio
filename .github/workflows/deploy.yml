@@ -19,7 +19,7 @@ jobs:
 
       - uses: aws-actions/configure-aws-credentials@v3
         with:
-  role-to-assume: arn:aws:iam::745854318709:role/GithubDeploy-Portfolio
+          role-to-assume: arn:aws:iam::745854318709:role/GithubDeploy-Portfolio
           aws-region: us-east-1
 
       - run: npm ci
