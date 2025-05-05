@@ -119,10 +119,10 @@ export default function Portfolio() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden">
+  <div className="flex flex-col min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden">
       <ParticleBackground cursorPosition={cursorPosition} />
 
-      <div className="container mx-auto px-4 py-16 relative z-10">
+      <div className="container mx-auto px-4 py-16 relative z-10 flex-grow">
         <header className="flex flex-col items-center justify-center text-center mb-16">
           <motion.h1
             className="text-5xl md:text-7xl font-bold mb-4 relative"
@@ -341,17 +341,15 @@ export default function Portfolio() {
             transition={{ duration: 0.5, delay: 1.2 }}
             className="text-center max-w-2xl mx-auto mt-16"
           >
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">i build things people actually use</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">I build things people actually use</h2>
             
-            <p className="text-gray-400">Select a section above to explore my work and background.</p>
+            <p className="text-gray-400">Select a section above to explore my work and background</p>
           </motion.section>
         )}
       </div>
 
-      <footer className="border-t border-gray-800 mt-20 py-8 text-center text-gray-400 text-sm relative z-10">
-        <div className="container mx-auto">
+      <footer className="mt-auto py-8 text-center text-gray-400 text-sm relative z-10">
           <p>© {new Date().getFullYear()} Shahdad Kompani. All rights reserved.</p>
-        </div>
       </footer>
     </div>
   )
