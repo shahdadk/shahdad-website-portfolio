@@ -27,57 +27,39 @@ export default function Portfolio() {
 
   const productionProjects = [
     {
-      title: "Enterprise iOS App",
-      description: "A comprehensive iOS application for enterprise resource management",
-      techStack: ["Swift", "UIKit", "Core Data", "Firebase"],
-      link: "#",
-      github: "#",
+      title: "SwiftSign (Beta)",
+      description: "AI‑powered NDA flow: upload, auto‑extract & explain clauses, e-sign, and send with audit trail in under 2 minutes.",
+      techStack: ["Next.js", "AWS Amplify", "S3 & API Gateway → Lambda", "DynamoDB", "OpenAI API"],
+      link: "https://www.swiftsign.ca",
     },
     {
-      title: "E-commerce Platform",
-      description: "Full-stack e-commerce solution with advanced analytics",
-      techStack: ["React", "Node.js", "MongoDB", "AWS"],
-      link: "#",
-      github: "#",
+      title: "MyBackPal",
+      description: "HIPAA-compliant iOS application designed for back health",
+      techStack: ["Swift", "Firebase", "Core Data", "CloudKit", "OpenAI API"],
+      link: "https://apps.apple.com/ca/app/mybackpal-healthier-backs/id6744826935",
     },
     {
-      title: "Health Tracking System",
-      description: "HIPAA-compliant health metrics tracking application",
-      techStack: ["Swift", "HealthKit", "AWS", "PostgreSQL"],
-      link: "#",
-      github: "#",
+      title: "Scoli",
+      description: "HIPAA-compliant iOS application designed for managing scoliosis",
+      techStack: ["Swift", "Firebase", "Core Data", "CloudKit", "OpenAI API"],
+      link: "https://apps.apple.com/ca/app/scoli-manage-scoliosis/id6741025066",
     },
   ]
 
   const personalProjects = [
     {
-      title: "Open Source CLI Tool",
-      description: "Command-line utility for automating development workflows",
-      techStack: ["Go", "Cobra", "GitHub Actions"],
-      link: "#",
-      github: "#",
+      title: "EcoSpend 360",
+      description: "Parses receipts through a photo to show live CO2 analytics",
+      techStack: ["Next.js", "AWS DynamoDB", "AWS Amplify", "AWS Lambda"],
     },
-    {
-      title: "Machine Learning Experiment",
-      description: "Image classification model with custom dataset",
-      techStack: ["Python", "TensorFlow", "Jupyter"],
-      link: "#",
-      github: "#",
-    },
+  
     {
       title: "Personal Blog",
       description: "Technical blog built with modern web technologies",
-      techStack: ["Next.js", "MDX", "Tailwind CSS", "Vercel"],
-      link: "#",
-      github: "#",
+      techStack: ["Next.js", "AWS S3", "AWS CloudFront", "Github Actions"],
+
     },
-    {
-      title: "Mobile Game",
-      description: "Casual puzzle game with over 10k downloads",
-      techStack: ["Swift", "SpriteKit", "Firebase"],
-      link: "#",
-      github: "#",
-    },
+    
   ]
 
   const educationItems = [
