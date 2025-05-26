@@ -9,7 +9,7 @@ interface ProjectCardProps {
     description: string
     techStack: string[]
     link: string
-    github: string
+    github?: string
   }
 }
 
