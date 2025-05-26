@@ -8,7 +8,7 @@ interface ProjectCardProps {
     title: string
     description: string
     techStack: string[]
-    link: string
+    link?: string
     github?: string
   }
 }
