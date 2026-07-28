@@ -198,7 +198,7 @@ export default function Portfolio() {
               <motion.div className="hero-bottom" variants={reveal}>
                 <p>
                   Building <a href="https://appfi.dev">Appfi</a>, shipping products, and studying
-                  mechatronics at the University of Waterloo.
+                  engineering at the University of Waterloo.
                 </p>
                 <a className="circle-link" href="#work" aria-label="See selected work">
                   <ArrowDownRight aria-hidden="true" />
@@ -336,7 +336,7 @@ export default function Portfolio() {
                 </div>
                 <div>
                   <dt>Studying</dt>
-                  <dd>Mechatronics Engineering, University of Waterloo</dd>
+                  <dd>Engineering, University of Waterloo</dd>
                 </div>
                 <div>
                   <dt>Recognized</dt>
@@ -344,19 +344,21 @@ export default function Portfolio() {
                 </div>
               </dl>
 
-              <div className="principles">
-                <div>
-                  <span>Scope</span>
-                  <strong>Own the full stack.</strong>
-                </div>
-                <div>
-                  <span>Standard</span>
-                  <strong>Show the proof.</strong>
-                </div>
-                <div>
-                  <span>Pace</span>
-                  <strong>Keep the loop tight.</strong>
-                </div>
+              <div className="affiliations">
+                <span>Community</span>
+                <a
+                  href="https://velocityincubator.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="University of Waterloo and Velocity"
+                >
+                  <img
+                    src="/uw-velocity-logo.png"
+                    alt="University of Waterloo and Velocity"
+                    width="483"
+                    height="67"
+                  />
+                </a>
               </div>
             </div>
           </section>

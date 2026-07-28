@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://shahdadk.com"),
   title: "Shahdad Kompani — Founder & Engineer",
   description:
-    "Founder and engineer building Appfi, shipping software products, and studying mechatronics at the University of Waterloo.",
+    "Founder and engineer building Appfi, shipping software products, and studying engineering at the University of Waterloo.",
   openGraph: {
     title: "Shahdad Kompani — Founder & Engineer",
     description: "I build useful software. Unreasonably fast.",
