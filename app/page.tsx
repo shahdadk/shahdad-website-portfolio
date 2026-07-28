@@ -1,364 +1,403 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Github, Linkedin } from "lucide-react"
-import ParticleBackground from "@/components/particle-background"
-import ProjectCard from "@/components/project-card"
-import TimelineItem from "@/components/timeline-item"
-import { cn } from "@/lib/utils"
+import { useEffect, useState } from "react"
+import { motion, useReducedMotion } from "framer-motion"
+import { ArrowDownRight, ArrowUpRight, Github, Linkedin, Mail } from "lucide-react"
 
-export default function Portfolio() {
-  const [activeSection, setActiveSection] = useState<string | null>(null)
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
+const buildSteps = [
+  {
+    name: "Frame",
+    description: "Find the real constraint.",
+  },
+  {
+    name: "Build",
+    description: "Ship the whole system.",
+  },
+  {
+    name: "Verify",
+    description: "Prove that it works.",
+  },
+]
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setCursorPosition({ x: e.clientX, y: e.clientY })
-    }
+const projects = [
+  {
+    number: "01",
+    name: "Appfi",
+    kicker: "Founder · Product · Engineering",
+    description:
+      "The assistant you text. It remembers the context, does real work, and checks the result before it says done.",
+    href: "https://appfi.dev",
+    cta: "Meet Appfi",
+    tags: ["iMessage + SMS", "AI systems", "2026"],
+    visual: "appfi",
+  },
+  {
+    number: "02",
+    name: "SwiftSign",
+    kicker: "Product · Full-stack · Infrastructure",
+    description:
+      "A calmer agreement workflow that brings contract analysis, e-signatures, and an audit trail into one place.",
+    href: "https://www.swiftsign.ca",
+    cta: "Open SwiftSign",
+    tags: ["Web product", "AI + e-sign", "2025"],
+    visual: "swiftsign",
+  },
+  {
+    number: "03",
+    name: "Scoli + MyBackPal",
+    kicker: "iOS · Product · App Store",
+    description:
+      "Two native iPhone products for back health, taken from the first build through production and App Store review.",
+    href: "https://apps.apple.com/ca/app/scoli-manage-scoliosis/id6741025066",
+    secondaryHref: "https://apps.apple.com/ca/app/mybackpal-healthier-backs/id6744826935",
+    cta: "View Scoli",
+    secondaryCta: "View MyBackPal",
+    tags: ["Native iOS", "Health + habits", "2025"],
+    visual: "health",
+  },
+]
 
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [])
+const reveal = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+  },
+}
 
-  const handleSectionClick = (section: string) => {
-    setActiveSection(section === activeSection ? null : section)
+function ProjectVisual({ type }: { type: string }) {
+  if (type === "appfi") {
+    return (
+      <div className="project-visual appfi-visual" aria-hidden="true">
+        <div className="message-window">
+          <div className="message-window__bar">
+            <span />
+            <span>Appfi</span>
+            <span>•••</span>
+          </div>
+          <div className="message message--sent">remind me to send that proposal friday</div>
+          <div className="message message--received">set for friday at 9am</div>
+          <div className="message-proof">
+            <span className="proof-dot" />
+            reminder verified
+          </div>
+        </div>
+        <span className="visual-stamp">TEXT → WORK</span>
+      </div>
+    )
   }
 
-  const productionProjects = [
-    {
-      title: "SwiftSign (Beta)",
-      description: "AI‑powered NDA flow: upload, auto‑extract & explain clauses, e-sign, and send with audit trail in under 2 minutes.",
-      techStack: ["Next.js", "AWS Amplify", "S3 & API Gateway → Lambda", "DynamoDB", "OpenAI API"],
-      link: "https://www.swiftsign.ca",
-    },
-    {
-      title: "MyBackPal",
-      description: "HIPAA-compliant iOS application designed for back health",
-      techStack: ["Swift", "Firebase", "Core Data", "CloudKit", "OpenAI API"],
-      link: "https://apps.apple.com/ca/app/mybackpal-healthier-backs/id6744826935",
-    },
-    {
-      title: "Scoli",
-      description: "HIPAA-compliant iOS application designed for managing scoliosis",
-      techStack: ["Swift", "Firebase", "Core Data", "CloudKit", "OpenAI API"],
-      link: "https://apps.apple.com/ca/app/scoli-manage-scoliosis/id6741025066",
-    },
-  ]
-
-  const personalProjects = [
-    {
-      title: "EcoSpend 360",
-      description: "Parses receipts through a photo to show live CO2 analytics",
-      techStack: ["Next.js", "AWS DynamoDB", "AWS Amplify", "AWS Lambda"],
-    },
-  
-    {
-      title: "Personal Blog",
-      description: "Technical blog built with modern web technologies",
-      techStack: ["Next.js", "AWS S3", "AWS CloudFront", "Github Actions"],
-
-    },
-    
-  ]
-
-  const educationItems = [
-    {
-      title: "Norman Esch Enterprise Co-op Award",
-      organization: "University of Waterloo",
-      date: "2025",
-      description: "Pitch competition, $10,000",
-    },
-    {
-      title: "BASc in Mechatronics Engineering",
-      organization: "University of Waterloo",
-      date: "2024 - 2029",
-      description: "Excellent standing, GPA 3.9/4.0",
-    },
-    {
-      title: "President’s Scholarship of Distinction",
-      organization: "University of Waterloo",
-      date: "2024",
-      description: "$5,000",
-    },
-    {
-      title: "Ontario Secondary School Diploma",
-      organization: "Waterloo Collegiate Institute",
-      date: "2020 - 2024",
-      description: "Advanced placement, 97.16%",
-    },
-  ]
-
-  const buttonVariants = {
-    initial: { scale: 1, y: 0 },
-    hover: { scale: 1.05, y: -5, transition: { duration: 0.2 } },
-    tap: { scale: 0.95, transition: { duration: 0.1 } },
-  }
-
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+  if (type === "swiftsign") {
+    return (
+      <div className="project-visual swiftsign-visual" aria-hidden="true">
+        <div className="document-sheet document-sheet--back">
+          <span />
+          <span />
+          <span />
+        </div>
+        <div className="document-sheet document-sheet--front">
+          <div className="document-mark">S</div>
+          <strong>Agreement ready</strong>
+          <span />
+          <span />
+          <div className="signature-line">signed ✓</div>
+        </div>
+        <div className="audit-chip">AUDIT TRAIL · 04/04</div>
+      </div>
+    )
   }
 
   return (
-  <div className="flex flex-col min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden">
-      <ParticleBackground cursorPosition={cursorPosition} />
+    <div className="project-visual health-visual" aria-hidden="true">
+      <div className="phone phone--left">
+        <div className="phone-island" />
+        <span className="phone-label">SCOLI</span>
+        <strong>78%</strong>
+        <span className="phone-caption">weekly habits</span>
+        <div className="phone-meter">
+          <span />
+        </div>
+      </div>
+      <div className="phone phone--right">
+        <div className="phone-island" />
+        <span className="phone-label">BACKPAL</span>
+        <div className="posture-orbit">
+          <span />
+        </div>
+        <span className="phone-caption">posture check</span>
+      </div>
+      <span className="visual-stamp visual-stamp--light">2× APP STORE</span>
+    </div>
+  )
+}
 
-      <div className="container mx-auto px-4 py-16 relative z-10 flex-grow">
-        <header className="flex flex-col items-center justify-center text-center mb-16">
-          <motion.h1
-            className="text-5xl md:text-7xl font-bold mb-4 relative"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            whileHover={{ scale: 1.00 }}
-          >
-            <span className="relative">
-              Shahdad Kompani
-              <motion.span
-                className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-teal-500"
-                initial={{ width: 0 }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 1, delay: 1 }}
-              />
-            </span>
-          </motion.h1>
+export default function Portfolio() {
+  const [activeStep, setActiveStep] = useState(0)
+  const reduceMotion = useReducedMotion()
 
-          <motion.div
-            className="flex flex-wrap justify-center gap-4 mb-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-          >
-            {["iOS Engineer", "Full-Stack Engineer", "Dev Ops"].map((role, index) => (
-              <motion.span
-                key={role}
-                className="px-4 py-2 rounded-full bg-gray-800 text-sm md:text-base"
-                whileHover={{
-                  scale: 1.1,
-                  backgroundColor: "#2d3748",
-                  boxShadow: "0 0 15px rgba(66, 153, 225, 0.5)",
-                }}
-                transition={{ duration: 0.2 }}
-              >
-                {role}
-              </motion.span>
-            ))}
-          </motion.div>
+  useEffect(() => {
+    if (reduceMotion) return
 
-          <motion.div
-            className="flex gap-6 mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1 }}
-          >
-            <motion.a
-              href="https://github.com/shahdadk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
-              whileHover={{
-                scale: 1.2,
-                boxShadow: "0 0 15px rgba(66, 153, 225, 0.7)",
-              }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Github className="w-6 h-6 text-blue-400" />
-              <span className="sr-only">GitHub</span>
-            </motion.a>
-            <motion.a
-              href="https://linkedin.com/in/shahdadk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
-              whileHover={{
-                scale: 1.2,
-                boxShadow: "0 0 15px rgba(66, 153, 225, 0.7)",
-              }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Linkedin className="w-6 h-6 text-blue-400" />
-              <span className="sr-only">LinkedIn</span>
-            </motion.a>
-          </motion.div>
+    const timer = window.setInterval(() => {
+      setActiveStep((current) => (current + 1) % buildSteps.length)
+    }, 2600)
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-3xl">
-            <motion.button
-              onClick={() => handleSectionClick("production")}
-              className={cn(
-                "relative overflow-hidden rounded-xl py-6 px-4 bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 shadow-lg",
-                activeSection === "production" && "border-blue-500",
-              )}
-              variants={buttonVariants}
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
-            >
-              <motion.span
-                className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0"
-                animate={{ opacity: activeSection === "production" ? 0.3 : 0 }}
-              />
-              <h2 className="text-xl font-bold mb-1">Released Apps</h2>
-              <p className="text-sm text-gray-400">Live with real users</p>
-            </motion.button>
+    return () => window.clearInterval(timer)
+  }, [reduceMotion])
 
-            <motion.button
-              onClick={() => handleSectionClick("projects")}
-              className={cn(
-                "relative overflow-hidden rounded-xl py-6 px-4 bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 shadow-lg",
-                activeSection === "projects" && "border-purple-500",
-              )}
-              variants={buttonVariants}
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
-            >
-              <motion.span
-                className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-teal-600/20 opacity-0"
-                animate={{ opacity: activeSection === "projects" ? 0.3 : 0 }}
-              />
-              <h2 className="text-xl font-bold mb-1">Projects</h2>
-              <p className="text-sm text-gray-400">Personal & open source work</p>
-            </motion.button>
+  const advanceLoop = () => {
+    setActiveStep((current) => (current + 1) % buildSteps.length)
+  }
 
-            <motion.button
-              onClick={() => handleSectionClick("education")}
-              className={cn(
-                "relative overflow-hidden rounded-xl py-6 px-4 bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 shadow-lg",
-                activeSection === "education" && "border-teal-500",
-              )}
-              variants={buttonVariants}
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
-            >
-              <motion.span
-                className="absolute inset-0 bg-gradient-to-r from-teal-600/20 to-blue-600/20 opacity-0"
-                animate={{ opacity: activeSection === "education" ? 0.3 : 0 }}
-              />
-              <h2 className="text-xl font-bold mb-1">Awards & Education</h2>
-              <p className="text-sm text-gray-400">Qualifications & achievements</p>
-            </motion.button>
+  return (
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+
+      <div className="site-shell">
+        <header className="site-header">
+          <a className="wordmark" href="#top" aria-label="Shahdad Kompani, home">
+            SK<span className="wordmark-dot">.</span>
+          </a>
+
+          <nav className="site-nav" aria-label="Main navigation">
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="mailto:shahdad@appfi.dev">Contact</a>
+          </nav>
+
+          <div className="availability">
+            <span className="availability-dot" />
+            Building in Waterloo
           </div>
         </header>
 
-        <AnimatePresence mode="wait">
-          {activeSection === "production" && (
-            <motion.section
-              key="production"
-              variants={sectionVariants}
-              initial="hidden"
+        <main id="main">
+          <section className="hero" id="top">
+            <motion.div
+              className="hero-copy"
+              initial={reduceMotion ? false : "hidden"}
               animate="visible"
-              exit="hidden"
-              className="mb-20"
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.09 } },
+              }}
             >
-              <h2 className="text-3xl font-bold mb-8 text-center">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">
-                  Released Apps
-                </span>
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {productionProjects.map((project, index) => (
-                  <motion.div key={project.title} variants={itemVariants} transition={{ delay: index * 0.1 }}>
-                    <ProjectCard project={project} />
-                  </motion.div>
-                ))}
-              </div>
-            </motion.section>
-          )}
+              <motion.p className="eyebrow" variants={reveal}>
+                Shahdad Kompani · Founder + engineer
+              </motion.p>
+              <motion.h1 variants={reveal}>
+                I build useful
+                <br />
+                software.
+                <br />
+                <span>Unreasonably fast.</span>
+              </motion.h1>
+              <motion.div className="hero-bottom" variants={reveal}>
+                <p>
+                  Building <a href="https://appfi.dev">Appfi</a>, shipping products, and studying
+                  mechatronics at the University of Waterloo.
+                </p>
+                <a className="circle-link" href="#work" aria-label="See selected work">
+                  <ArrowDownRight aria-hidden="true" />
+                </a>
+              </motion.div>
+            </motion.div>
 
-          {activeSection === "projects" && (
-            <motion.section
-              key="projects"
-              variants={sectionVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              className="mb-20"
+            <motion.aside
+              className="build-panel"
+              initial={reduceMotion ? false : { opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
             >
-              <h2 className="text-3xl font-bold mb-8 text-center">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-600">
-                  Personal Projects
+              <button className="build-loop" type="button" onClick={advanceLoop}>
+                <span className="build-loop__top">
+                  <span>Build loop</span>
+                  <span>Tap to advance ↗</span>
                 </span>
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {personalProjects.map((project, index) => (
-                  <motion.div key={project.title} variants={itemVariants} transition={{ delay: index * 0.1 }}>
-                    <ProjectCard project={project} />
-                  </motion.div>
-                ))}
-              </div>
-            </motion.section>
-          )}
-
-          {activeSection === "education" && (
-            <motion.section
-              key="education"
-              variants={sectionVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              className="mb-20"
-            >
-              <h2 className="text-3xl font-bold mb-8 text-center">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-teal-600">
-                  Awards & Education
+                <span className="build-loop__number">0{activeStep + 1}</span>
+                <span className="build-loop__content" aria-live="polite">
+                  <strong>{buildSteps[activeStep].name}</strong>
+                  <span>{buildSteps[activeStep].description}</span>
                 </span>
-              </h2>
-              <div className="max-w-3xl mx-auto">
-                {educationItems.map((item, index) => (
-                  <motion.div key={item.title} variants={itemVariants} transition={{ delay: index * 0.1 }}>
-                    <TimelineItem item={item} isLast={index === educationItems.length - 1} />
-                  </motion.div>
-                ))}
+                <span className="build-loop__steps" aria-hidden="true">
+                  {buildSteps.map((step, index) => (
+                    <span key={step.name} className={index === activeStep ? "is-active" : ""}>
+                      {step.name}
+                    </span>
+                  ))}
+                </span>
+              </button>
+
+              <div className="identity-grid">
+                <div>
+                  <span>Now</span>
+                  <strong>Building Appfi</strong>
+                </div>
+                <div>
+                  <span>Based</span>
+                  <strong>Waterloo, CA</strong>
+                </div>
+                <div>
+                  <span>Mode</span>
+                  <strong>Founder / Eng.</strong>
+                </div>
+                <div>
+                  <span>Off-screen</span>
+                  <strong>Probably biking</strong>
+                </div>
               </div>
-            </motion.section>
-          )}
-        </AnimatePresence>
+            </motion.aside>
+          </section>
 
-        {!activeSection && (
-  <motion.section
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: 1.2 }}
-    className="text-center max-w-2xl mx-auto mt-16"
-  >
-    <h2 className="text-2xl md:text-3xl font-bold mb-4">
-      I build things people{" "}
-      <span className="relative inline-block">
-        actually use
-        <motion.span
-          className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-teal-500"
-          initial={{ width: 0 }}
-          animate={{ width: "100%" }}
-          transition={{ duration: 1, delay: 1.4 }}
-        />
-      </span>
-    </h2>
+          <div className="signal-strip" aria-label="Current focus">
+            <span>PRODUCTS → PRODUCTION</span>
+            <span>AI SYSTEMS</span>
+            <span>NATIVE iOS</span>
+            <span>FULL-STACK</span>
+          </div>
 
-    <p className="text-gray-400">
-      Select a section above to explore my work and background
-    </p>
-  </motion.section>
-)}
+          <section className="work-section" id="work">
+            <div className="section-heading">
+              <p className="eyebrow">Selected work · 2025—2026</p>
+              <h2>Ideas are cheap.<br />Shipped work is not.</h2>
+              <p>
+                Products where I owned the hard parts, from the first sketch to the production
+                system behind it.
+              </p>
+            </div>
 
+            <div className="project-list">
+              {projects.map((project, index) => (
+                <motion.article
+                  className={`project project--${project.visual}`}
+                  key={project.name}
+                  initial={reduceMotion ? false : { opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.7, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <div className="project-copy">
+                    <div className="project-index">
+                      <span>{project.number}</span>
+                      <span>{project.kicker}</span>
+                    </div>
+                    <h3>{project.name}</h3>
+                    <p>{project.description}</p>
+                    <div className="project-tags">
+                      {project.tags.map((tag) => (
+                        <span key={tag}>{tag}</span>
+                      ))}
+                    </div>
+                    <div className="project-links">
+                      <a href={project.href} target="_blank" rel="noreferrer">
+                        {project.cta}
+                        <ArrowUpRight aria-hidden="true" />
+                      </a>
+                      {"secondaryHref" in project && project.secondaryHref ? (
+                        <a href={project.secondaryHref} target="_blank" rel="noreferrer">
+                          {project.secondaryCta}
+                          <ArrowUpRight aria-hidden="true" />
+                        </a>
+                      ) : null}
+                    </div>
+                  </div>
+                  <ProjectVisual type={project.visual} />
+                </motion.article>
+              ))}
+            </div>
+          </section>
+
+          <section className="about-section" id="about">
+            <div className="about-statement">
+              <p className="eyebrow">A little context</p>
+              <h2>
+                I like the distance between
+                <span> “this should exist” </span>
+                and
+                <span> “it does” </span>
+                to be short.
+              </h2>
+            </div>
+
+            <div className="about-details">
+              <p>
+                I&apos;m Shahdad, a founder and engineer in Waterloo, Canada. I work across product,
+                code, infrastructure, and the strange last mile that turns a demo into something
+                people can actually use.
+              </p>
+
+              <dl className="fact-list">
+                <div>
+                  <dt>Currently</dt>
+                  <dd>Founder, Appfi</dd>
+                </div>
+                <div>
+                  <dt>Studying</dt>
+                  <dd>Mechatronics Engineering, University of Waterloo</dd>
+                </div>
+                <div>
+                  <dt>Recognized</dt>
+                  <dd>Norman Esch Enterprise Co-op Award, 2025</dd>
+                </div>
+              </dl>
+
+              <div className="principles">
+                <div>
+                  <span>Scope</span>
+                  <strong>Own the full stack.</strong>
+                </div>
+                <div>
+                  <span>Standard</span>
+                  <strong>Show the proof.</strong>
+                </div>
+                <div>
+                  <span>Pace</span>
+                  <strong>Keep the loop tight.</strong>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer className="site-footer">
+          <div className="footer-cta">
+            <p className="eyebrow">Have something real to build?</p>
+            <a href="mailto:shahdad@appfi.dev">
+              Let&apos;s talk.
+              <ArrowUpRight aria-hidden="true" />
+            </a>
+          </div>
+
+          <div className="footer-bottom">
+            <span>© {new Date().getFullYear()} Shahdad Kompani</span>
+            <div className="social-links">
+              <a href="mailto:shahdad@appfi.dev" aria-label="Email Shahdad">
+                <Mail aria-hidden="true" />
+              </a>
+              <a
+                href="https://github.com/shahdadk"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Shahdad on GitHub"
+              >
+                <Github aria-hidden="true" />
+              </a>
+              <a
+                href="https://linkedin.com/in/shahdadk"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Shahdad on LinkedIn"
+              >
+                <Linkedin aria-hidden="true" />
+              </a>
+            </div>
+            <a href="#top">Back to top ↑</a>
+          </div>
+        </footer>
       </div>
-
-      <footer className="mt-auto py-8 text-center text-gray-400 text-sm relative z-10">
-          <p>© {new Date().getFullYear()} Shahdad Kompani. All rights reserved.</p>
-      </footer>
-    </div>
+    </>
   )
 }
