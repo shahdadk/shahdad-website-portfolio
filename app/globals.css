@@ -477,13 +477,14 @@ button {
 }
 
 .project h3 {
-  max-width: 720px;
+  max-width: 100%;
   margin: auto 0 20px;
   font-family: var(--font-display), Impact, sans-serif;
-  font-size: clamp(4rem, 7vw, 8rem);
+  font-size: clamp(3.4rem, 5.1vw, 5.15rem);
   font-weight: 400;
-  line-height: 0.82;
-  letter-spacing: -0.055em;
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
   text-transform: uppercase;
 }
 
@@ -1097,7 +1098,7 @@ button:focus-visible {
   }
 
   .project h3 {
-    font-size: clamp(3.6rem, 7.5vw, 6rem);
+    font-size: clamp(3.25rem, 5.8vw, 4.5rem);
   }
 
   .about-section {
@@ -1230,7 +1231,7 @@ button:focus-visible {
   }
 
   .project h3 {
-    font-size: clamp(3.8rem, 17vw, 6rem);
+    font-size: clamp(3rem, 13.2vw, 4rem);
   }
 
   .project-index span:last-child {

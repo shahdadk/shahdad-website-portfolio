@@ -121,7 +121,7 @@ function ProjectVisual({ type }: { type: string }) {
       </div>
       <div className="phone phone--right">
         <div className="phone-island" />
-        <span className="phone-label">BACKPAL</span>
+        <span className="phone-label">MYBACKPAL</span>
         <div className="posture-orbit">
           <span />
         </div>
