@@ -189,11 +189,11 @@ export default function Portfolio() {
                 Shahdad Kompani · Founder + engineer
               </motion.p>
               <motion.h1 variants={reveal}>
-                I build useful
+                I build
                 <br />
-                software.
+                software
                 <br />
-                <span>Unreasonably fast.</span>
+                <span>for people.</span>
               </motion.h1>
               <motion.div className="hero-bottom" variants={reveal}>
                 <p>
@@ -261,11 +261,10 @@ export default function Portfolio() {
 
           <section className="work-section" id="work">
             <div className="section-heading">
-              <p className="eyebrow">Selected work · 2025—2026</p>
-              <h2>Ideas are cheap.<br />Shipped work is not.</h2>
+              <p className="eyebrow">Products · 2025—2026</p>
+              <h2>Recent<br />work.</h2>
               <p>
-                Products where I owned the hard parts, from the first sketch to the production
-                system behind it.
+                A selection of products I&apos;ve worked on, from early ideas through production.
               </p>
             </div>
 

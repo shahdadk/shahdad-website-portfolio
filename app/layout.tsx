@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     "Founder and engineer building Appfi, shipping software products, and studying engineering at the University of Waterloo.",
   openGraph: {
     title: "Shahdad Kompani — Founder & Engineer",
-    description: "I build useful software. Unreasonably fast.",
+    description: "I build software for people.",
     url: "https://shahdadk.com",
     siteName: "Shahdad Kompani",
     type: "website",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "Shahdad Kompani — Founder & Engineer",
-    description: "I build useful software. Unreasonably fast.",
+    description: "I build software for people.",
   },
   icons: {
     icon: "/TopImage.png",
